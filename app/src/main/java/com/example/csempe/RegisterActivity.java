@@ -1,25 +1,31 @@
 package com.example.csempe;
 
 
-import static android.webkit.ConsoleMessage.MessageLevel.LOG;
-import static androidx.core.content.PackageManagerCompat.LOG_TAG;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 
 public class RegisterActivity extends AppCompatActivity {
     EditText userName;
     EditText password;
-
     EditText email;
     EditText password2;
+
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        int secret_key = getIntent().getIntExtra("SECRET_KEY",0);
+        if (secret_key != 99){
+            finish();
+        }
         setContentView(R.layout.register);
     }
     public void register(View view){

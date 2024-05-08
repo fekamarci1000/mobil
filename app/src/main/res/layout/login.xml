@@ -18,6 +18,7 @@
             android:layout_weight="1"
             android:clickable="true"
             android:gravity="center"
+            android:onClick="navigateToHome"
             android:padding="16dp"
             android:text="Home"
             android:textColor="@android:color/white" />
@@ -29,6 +30,7 @@
             android:layout_weight="1"
             android:clickable="true"
             android:gravity="center"
+            android:onClick="navigateToWebshop"
             android:padding="16dp"
             android:text="Webshop"
             android:textColor="@android:color/white" />
@@ -40,10 +42,10 @@
             android:layout_weight="1"
             android:clickable="true"
             android:gravity="center"
+            android:onClick="navigateToLogin"
             android:padding="16dp"
             android:text="Login"
-            android:textColor="@android:color/white"
-            android:onClick="navigateToLogin" />
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
 
@@ -84,7 +86,28 @@
                 android:layout_marginBottom="8dp"
                 android:insetTop="30dp"
                 android:insetBottom="8dp"
+                android:onClick="login"
                 android:text="Login" />
+
+            <Button
+                android:id="@+id/buttonLoginGoogle"
+                android:layout_width="210dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:insetTop="15dp"
+                android:insetBottom="8dp"
+                android:onClick="loginGoogle"
+                android:text="Login via Google" />
+
+            <Button
+                android:id="@+id/buttonLoginAnonymous"
+                android:layout_width="210dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:insetTop="15dp"
+                android:insetBottom="8dp"
+                android:onClick="loginAnonymous"
+                android:text="Login anonymous" />
 
             <TextView
                 android:id="@+id/registerTextView"

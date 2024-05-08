@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Csempe"
         tools:targetApi="31">
         <activity
+            android:name=".ListActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -21,11 +24,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".RegisterActivity"
+                  android:exported="false" />
         <activity android:name=".LoginActivity" />
-
-
-
     </application>
 
 </manifest>

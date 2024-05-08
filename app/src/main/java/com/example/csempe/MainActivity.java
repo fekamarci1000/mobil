@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import androidx.activity.EdgeToEdge;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+
         setContentView(R.layout.activity_main);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -41,16 +41,59 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-    public void navigateToRegister(View view) {
-        Intent intent = new Intent(this, RegisterActivity.class);
+    public void loginGoogle(View view){
+        //TODO
+    }
+    public void loginAnonymous(View view){
+        //TODO
+    }
+    public void navigateToWebshop(View view){
+        Intent intent = new Intent(this, ListActivity.class);
         startActivity(intent);
     }
+    public void navigateToHome(View view){
+        setContentView(R.layout.activity_main);
+    }
+
     public void navigateToLogin(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        /*SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("userName", userNameET.getText().toString());
+        editor.putString("password", passwordET.getText().toString());
+        editor.apply();
+
+        Log.i(LOG_TAG, "onPause");*/
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
 }

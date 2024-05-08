@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "409400028891",
+    "project_id": "mobilfejl",
+    "storage_bucket": "mobilfejl.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:409400028891:android:38192166a6750e2446a6fe",
+        "android_client_info": {
+          "package_name": "com.example.csempe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "409400028891-97ps25liprm00nt7snjcrgbrejtnjegv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.csempe",
+            "certificate_hash": "fb755432d079da170155101728409045108080cb"
+          }
+        },
+        {
+          "client_id": "409400028891-3a4lde1qlnqftgri390e77412aict343.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeKN56Yo5FCNTpy_uryRu2cdPsaDluF78"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "409400028891-3a4lde1qlnqftgri390e77412aict343.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
