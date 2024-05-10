@@ -26,17 +26,6 @@
             android:onClick="navigateToHome"
             android:textColor="@android:color/white" />
 
-        <TextView
-            android:id="@+id/webshopTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:gravity="center"
-            android:onClick="navigateToWebshop"
-            android:padding="16dp"
-            android:text="Webshop"
-            android:textColor="@android:color/white" />
 
         <TextView
             android:id="@+id/login"

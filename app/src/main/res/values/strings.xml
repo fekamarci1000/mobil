@@ -1,4 +1,69 @@
 <resources>
     <string name="app_name">csempe</string>
     <string name="don_t_have_an_account_register_here">Don\'t have an account? Register here</string>
+    <string name="cart">Cart</string>
+    <string-array name="shopping_item_names">
+        <item>Tile</item>
+        <item>Colorful Tile</item>
+        <item>Tile</item>
+        <item>Tile</item>
+        <item>Ceramic Tile</item>
+        <item>Tile</item>
+        <item>Colorful Tile</item>
+        <item>Tile</item>
+        <item>Ceramic Tile</item>
+        <item>Tile</item>
+    </string-array>
+
+    <string-array name="shopping_item_brands">
+        <item>Geranit</item>
+        <item>Hera</item>
+        <item>Dulux</item>
+        <item>Obey</item>
+        <item>Creamic</item>
+        <item>Oktane</item>
+        <item>Fenec</item>
+        <item>Kalnor</item>
+        <item>Chingchong</item>
+        <item>Lamine</item>
+    </string-array>
+
+    <array name="shopping_item_rates">
+        <item>4.3</item>
+        <item>3.7</item>
+        <item>4.6</item>
+        <item>1.3</item>
+        <item>3.2</item>
+        <item>4.3</item>
+        <item>5.0</item>
+        <item>4.1</item>
+        <item>2.3</item>
+        <item>2</item>
+    </array>
+
+    <array name="shopping_item_images">
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </array>
+
+    <array name="shopping_item_price">
+        <item>10 EUR / m2</item>
+        <item>14 EUR / m2</item>
+        <item>5 EUR / m2</item>
+        <item>30 EUR / m2</item>
+        <item>21 EUR / m2</item>
+        <item>70 EUR / m2</item>
+        <item>2 EUR / m2</item>
+        <item>50 EUR / m2</item>
+        <item>31 EUR / m2</item>
+        <item>8 EUR / m2</item>
+    </array>
 </resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/search_bar"
+        app:showAsAction="always"
+        android:title="Search"
+        app:actionViewClass="android.widget.SearchView"
+        >
+    </item>
+    <item
+        android:id="@+id/cart"
+        android:checkable="true"
+        android:enabled="true"
+        android:visible="true"
+        android:icon="@drawable/baseline_shopping_cart_24"
+        app:showAsAction="always"
+        app:actionLayout="@layout/cart_action_layout"
+        android:title="Cart" />
+
+    <item
+        android:id="@+id/log_out_button"
+        app:showAsAction="never"
+        android:title="Log out" />
+    <item
+        android:id="@+id/profile_button"
+        app:showAsAction="always"
+        android:icon="@drawable/baseline_account_circle_24"
+        android:title="Profile" />
+</menu>

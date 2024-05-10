@@ -15,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
     private static final int SECRET_KEY = 99;
     EditText userName;
     EditText password;
-
     EditText email;
     EditText password2;
 
@@ -31,21 +30,6 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-    }
-    public void login(View view){
-        userName = findViewById(R.id.editTextUsername);
-        password = findViewById(R.id.editTextPassword);
-
-        String userNameStr = String.valueOf(userName.getText());
-        String passwordStr = String.valueOf(password.getText());
-
-
-    }
-    public void loginGoogle(View view){
-        //TODO
-    }
-    public void loginAnonymous(View view){
-        //TODO
     }
     public void navigateToWebshop(View view){
         Intent intent = new Intent(this, ListActivity.class);

@@ -18,32 +18,23 @@
             android:layout_weight="1"
             android:clickable="true"
             android:gravity="center"
+            android:onClick="navigateToHome"
             android:padding="16dp"
             android:text="Home"
             android:textColor="@android:color/white" />
 
-        <TextView
-            android:id="@+id/webshopTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:gravity="center"
-            android:padding="16dp"
-            android:text="Webshop"
-            android:textColor="@android:color/white" />
 
         <TextView
-            android:id="@+id/register"
+            android:id="@+id/login"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
             android:gravity="center"
+            android:onClick="navigateToLogin"
             android:padding="16dp"
-            android:text="Register"
-            android:textColor="@android:color/white"
-            android:onClick="navigateToRegister" />
+            android:text="Login"
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
 
@@ -102,6 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
+                android:onClick="register"
                 android:text="Register" />
 
         </LinearLayout>
