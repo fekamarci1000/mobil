@@ -36,10 +36,9 @@ public class ShoppingItemAdapter extends RecyclerView.Adapter<ShoppingItemAdapte
     }
 
     @Override
-    public ShoppingItemAdapter.ViewHolder onCreateViewHolder(
-            ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(mContext)
-                .inflate(R.layout.list_item, parent, false));
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.list_item, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -126,12 +125,13 @@ public class ShoppingItemAdapter extends RecyclerView.Adapter<ShoppingItemAdapte
 
         void bindTo(ShoppingItem currentItem){
             mTitleText.setText(currentItem.getName());
-            mBrands.setText(currentItem.getInfo());
+            mBrands.setText(currentItem.getBrand());
             mPriceText.setText(currentItem.getPrice());
             mRatingBar.setRating(currentItem.getRatings());
 
             // Load the images into the ImageView using the Glide library.
-            //Glide.with(mContext).load(currentItem.getImageResource()).into(mItemImage);
+            Glide.with(mContext).load(currentItem.getImageResource()).into(mItemImage);
+
         }
     }
 }

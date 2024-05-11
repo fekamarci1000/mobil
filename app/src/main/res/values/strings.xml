@@ -2,6 +2,8 @@
     <string name="app_name">csempe</string>
     <string name="don_t_have_an_account_register_here">Don\'t have an account? Register here</string>
     <string name="cart">Cart</string>
+    <string name="brands_placeholder">Brands</string>
+    <string name="item_title_placeholder">title</string>
     <string-array name="shopping_item_names">
         <item>Tile</item>
         <item>Colorful Tile</item>
@@ -42,16 +44,16 @@
     </array>
 
     <array name="shopping_item_images">
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
+        <item>@drawable/csempe1</item>
+        <item>@drawable/csempe2</item>
+        <item>@drawable/csempe3</item>
+        <item>@drawable/csempe4</item>
+        <item>@drawable/csempe5</item>
+        <item>@drawable/csempe6</item>
+        <item>@drawable/csempe7</item>
+        <item>@drawable/csempe8</item>
+        <item>@drawable/csempe9</item>
+        <item>@drawable/csempe10</item>
     </array>
 
     <array name="shopping_item_price">

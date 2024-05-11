@@ -2,16 +2,21 @@ package com.example.csempe;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String LOG_TAG = MainActivity.class.getName();
     private static final int SECRET_KEY = 99;
     EditText userName;
     EditText password;
@@ -25,6 +30,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+        ConstraintLayout mainLayout = findViewById(R.id.main);
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        if (animation != null) {
+            Log.d(LOG_TAG, "Animation loaded successfully");
+            mainLayout.startAnimation(animation);
+        } else {
+            Log.w(LOG_TAG, "Failed to load animation resource");
+        }
+
+        if (animation != null) {
+            Log.d(LOG_TAG, "Animation loaded successfully");
+            mainLayout.startAnimation(animation);
+        } else {
+            Log.d("Animation", "Failed to load animation resource");
+        }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -61,13 +81,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-
-        /*SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("userName", userNameET.getText().toString());
-        editor.putString("password", passwordET.getText().toString());
-        editor.apply();
-
-        Log.i(LOG_TAG, "onPause");*/
     }
 
     @Override

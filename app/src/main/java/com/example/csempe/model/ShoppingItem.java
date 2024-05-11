@@ -1,15 +1,19 @@
 package com.example.csempe.model;
 
 public class ShoppingItem {
+
     private String name;
-    private String info;
+    private String brand;
     private String price;
     private float ratings;
-    private final int imageResource;
+    private int imageResource;
 
-    public ShoppingItem(String name, String info, String price, float ratings, int imageResource) {
+    public ShoppingItem() {
+    }
+
+    public ShoppingItem(String name, String brand, String price, float ratings, int imageResource) {
         this.name = name;
-        this.info = info;
+        this.brand = brand;
         this.price = price;
         this.ratings = ratings;
         this.imageResource = imageResource;
@@ -23,12 +27,12 @@ public class ShoppingItem {
         this.name = name;
     }
 
-    public String getInfo() {
-        return info;
+    public String getBrand() {
+        return brand;
     }
 
-    public void setInfo(String info) {
-        this.info = info;
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
     public String getPrice() {

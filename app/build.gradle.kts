@@ -43,7 +43,7 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 
-
+    implementation ("com.github.bumptech.glide:glide:4.13.2")
     implementation ("androidx.recyclerview:recyclerview:1.1.0")
     implementation ("androidx.recyclerview:recyclerview-selection:1.1.0")
     implementation ("com.github.bumptech.glide:glide:3.7.0")

@@ -3,7 +3,10 @@ package com.example.csempe;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -29,8 +32,10 @@ import com.example.csempe.Adapter.ShoppingItemAdapter;
 import com.example.csempe.model.ShoppingItem;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.ktx.Firebase;
-
 import java.util.ArrayList;
 
 public class ListActivity extends AppCompatActivity {
@@ -40,19 +45,19 @@ public class ListActivity extends AppCompatActivity {
     private static final String LOG_TAG = ListActivity.class.getName();
     private FirebaseUser user;
     private FirebaseAuth mAuth;
+    private FirebaseFirestore mFirestore;
     private FrameLayout purpleCircle;
     private TextView countTextView;
     private int cartItems = 0;
-    private int gridNumber = 1;
+    private CollectionReference mItems;
+    private Integer itemLimit = 5;
 
-    // Member variables.
     private RecyclerView mRecyclerView;
     private ArrayList<ShoppingItem> mItemsData;
     private ShoppingItemAdapter mAdapter;
 
     private SharedPreferences preferences;
 
-    private boolean viewRow = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,36 +71,99 @@ public class ListActivity extends AppCompatActivity {
         else {
             Log.d(LOG_TAG,"Authenticated user");
         }
-
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new GridLayoutManager(
-                this, gridNumber));
+                this, 1));
         mItemsData = new ArrayList<>();
         mAdapter = new ShoppingItemAdapter(this, mItemsData);
         mRecyclerView.setAdapter(mAdapter);
         Toolbar toolbar = findViewById(R.id.toolbar);
-
         setSupportActionBar(toolbar);
+        mFirestore = FirebaseFirestore.getInstance();
+        mItems = mFirestore.collection("ShoppingItem");
+        queryData();
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_POWER_CONNECTED);
+        filter.addAction(Intent.ACTION_POWER_DISCONNECTED);
+        this.registerReceiver(powerReceiver, filter);
+
+    }
+    BroadcastReceiver powerReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String intentAction = intent.getAction();
+
+            if (intentAction == null)
+                return;
+
+            switch (intentAction) {
+                case Intent.ACTION_POWER_CONNECTED:
+                    itemLimit = 10;
+                    queryData();
+                    break;
+                case Intent.ACTION_POWER_DISCONNECTED:
+                    itemLimit = 5;
+                    queryData();
+                    break;
+            }
+        }
+    };
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        this.unregisterReceiver(powerReceiver);
+    }
+    private void queryData() {
+        mItemsData.clear();
+        Log.d(LOG_TAG, "Querying data...");
+        Log.d(LOG_TAG, mItems.toString());
+        mItems.limit(itemLimit).get().addOnSuccessListener(queryDocumentSnapshots -> {
+            Log.d(LOG_TAG, "Query successful!");
+            for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                ShoppingItem item = document.toObject(ShoppingItem.class);
+                mItemsData.add(item);
+                Log.d(LOG_TAG, item.getName());
+            }
+
+            if (mItemsData.size() == 0) {
+                Log.d(LOG_TAG,"No data");
+                initializeData();
+                queryData();
+            }
+            Log.d(LOG_TAG, "Updating adapter...");
+            mAdapter.notifyDataSetChanged();
+        }).addOnFailureListener(e -> {
+            Log.d(LOG_TAG, "Query failed!");
+        });
     }
 
     private void initializeData() {
+        Log.d (LOG_TAG, "ANYAD");
         // Get the resources from the XML file.
         String[] itemsList = getResources()
                 .getStringArray(R.array.shopping_item_names);
-        String[] itemsInfo = getResources()
+
+        String[] itemsBrand = getResources()
                 .getStringArray(R.array.shopping_item_brands);
+
         String[] itemsPrice = getResources()
                 .getStringArray(R.array.shopping_item_price);
         TypedArray itemsImageResources =
                 getResources().obtainTypedArray(R.array.shopping_item_images);
         TypedArray itemRate = getResources().obtainTypedArray(R.array.shopping_item_rates);
-        mItemsData.clear();
         for (int i = 0; i < itemsList.length; i++) {
-            mItemsData.add(new ShoppingItem(itemsList[i], itemsInfo[i], itemsPrice[i], itemRate.getFloat(i, 0),
+            Log.d(LOG_TAG, ""+itemsList[i]+" "+ itemsBrand[i]+" "+ itemsPrice[i]);
+            mItems.add(new ShoppingItem(
+                    itemsList[i],
+                    itemsBrand[i],
+                    itemsPrice[i],
+                    itemRate.getFloat(i, 0),
                     itemsImageResources.getResourceId(i, 0)));
         }
-        ((TypedArray) itemsImageResources).recycle();
-        mAdapter.notifyDataSetChanged();
+
+        // Recycle the typed array.
+        itemsImageResources.recycle();
     }
 
 
@@ -145,7 +213,6 @@ public class ListActivity extends AppCompatActivity {
         }
         if (item.getItemId() == PROFILE_BUTTON_ID){
             Log.d(LOG_TAG, "profile clicked!");
-            FirebaseAuth.getInstance().signOut();
             return true;
         }
         if (item.getItemId() == CART_BUTTON_ID){
