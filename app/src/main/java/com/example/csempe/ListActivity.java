@@ -102,17 +102,6 @@ public class ListActivity extends AppCompatActivity {
         sortByPriceButton = findViewById(R.id.sort_by_price_button);
         groupByBrandButton = findViewById(R.id.group_by_brand_button);
 
-        /*sortByPriceButton.setOnClickListener(v -> {
-            sortByPrice = !sortByPrice;
-            sortByPriceButtonClicked++;
-            queryData();
-        });
-
-        groupByBrandButton.setOnClickListener(v -> {
-            groupByBrand = !groupByBrand;
-            groupByBrandButtonClicked++;
-            queryData();
-        });*/
         sortByPriceButton.setOnClickListener(v -> {
             isSortByPriceVisible = !isSortByPriceVisible;
             sortByPrice = !sortByPrice;
@@ -133,23 +122,6 @@ public class ListActivity extends AppCompatActivity {
         sortByPriceButton.setVisibility(isGroupByBrandVisible ? View.VISIBLE : View.GONE);
         groupByBrandButton.setVisibility(isSortByPriceVisible ? View.VISIBLE : View.GONE);
     }
-    /*private void updateButtonVisibility() {
-        if (sortByPriceButtonClicked == 0 && groupByBrandButtonClicked==0) {
-            sortByPriceButton.setVisibility(View.VISIBLE);
-            groupByBrandButton.setVisibility(View.VISIBLE);
-        } else if (sortByPriceButtonClicked>0) {
-            // Only sort by price is selected, hide group by brand
-            if(sortByPriceButtonClicked>1){
-                sortByPriceButtonClicked=0;
-            }
-            sortByPriceButton.setVisibility(View.VISIBLE);
-            groupByBrandButton.setVisibility(View.GONE);
-        } else if (groupByBrandButtonClicked>0) {
-            if (groupByBrandButtonClicked>1) groupByBrandButtonClicked=0;
-            sortByPriceButton.setVisibility(View.GONE);
-            groupByBrandButton.setVisibility(View.VISIBLE);
-        }
-    }*/
     BroadcastReceiver powerReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -250,7 +222,10 @@ public class ListActivity extends AppCompatActivity {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
-
+    public void navigateToProfile() {
+        Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -282,6 +257,7 @@ public class ListActivity extends AppCompatActivity {
         }
         if (item.getItemId() == PROFILE_BUTTON_ID){
             Log.d(LOG_TAG, "profile clicked!");
+            navigateToProfile();
             return true;
         }
         if (item.getItemId() == CART_BUTTON_ID){
