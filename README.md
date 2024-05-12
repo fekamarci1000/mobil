@@ -16,3 +16,5 @@
 - "Szubjektív pontozás a projekt egészére vonatkozólag:ez 5-ről indul és le lehet vonni, ha igénytelen, összecsapott, látszik hogy nem foglalkozott vele, kísértetiesen hasonlít a videóban létrehozotthoz stb."	3
 
 32 Pont
+
+Probléma esetén írj dcn : .dreamx
