@@ -5,11 +5,15 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.gms.auth.api.signin.*;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -29,6 +33,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+        ConstraintLayout loginContainer = findViewById(R.id.main);
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        loginContainer.startAnimation(animation);
         auth= FirebaseAuth.getInstance();
     }
     public void login(View view){
@@ -57,9 +64,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void loginGoogle() {
-        //TODO
-    }
 
     public void loginAnonymous(View view){
         auth.signInAnonymously().addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {

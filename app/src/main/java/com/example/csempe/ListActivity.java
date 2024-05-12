@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -34,6 +35,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.ktx.Firebase;
 import java.util.ArrayList;
@@ -57,6 +59,15 @@ public class ListActivity extends AppCompatActivity {
     private ShoppingItemAdapter mAdapter;
 
     private SharedPreferences preferences;
+    private boolean sortByPrice = false;
+    private boolean groupByBrand = false;
+    private Button sortByPriceButton;
+    private int sortByPriceButtonClicked=0;
+    private int groupByBrandButtonClicked=0;
+    private Button groupByBrandButton;
+
+    private boolean isSortByPriceVisible = true;
+    private boolean isGroupByBrandVisible = true;
 
 
     @Override
@@ -88,7 +99,57 @@ public class ListActivity extends AppCompatActivity {
         filter.addAction(Intent.ACTION_POWER_DISCONNECTED);
         this.registerReceiver(powerReceiver, filter);
 
+        sortByPriceButton = findViewById(R.id.sort_by_price_button);
+        groupByBrandButton = findViewById(R.id.group_by_brand_button);
+
+        /*sortByPriceButton.setOnClickListener(v -> {
+            sortByPrice = !sortByPrice;
+            sortByPriceButtonClicked++;
+            queryData();
+        });
+
+        groupByBrandButton.setOnClickListener(v -> {
+            groupByBrand = !groupByBrand;
+            groupByBrandButtonClicked++;
+            queryData();
+        });*/
+        sortByPriceButton.setOnClickListener(v -> {
+            isSortByPriceVisible = !isSortByPriceVisible;
+            sortByPrice = !sortByPrice;
+            updateButtonVisibility();
+            queryData();
+        });
+
+        groupByBrandButton.setOnClickListener(v -> {
+            isGroupByBrandVisible = !isGroupByBrandVisible;
+            groupByBrand = !groupByBrand;
+            updateButtonVisibility();
+            queryData();
+        });
+
     }
+    private void updateButtonVisibility() {
+
+        sortByPriceButton.setVisibility(isGroupByBrandVisible ? View.VISIBLE : View.GONE);
+        groupByBrandButton.setVisibility(isSortByPriceVisible ? View.VISIBLE : View.GONE);
+    }
+    /*private void updateButtonVisibility() {
+        if (sortByPriceButtonClicked == 0 && groupByBrandButtonClicked==0) {
+            sortByPriceButton.setVisibility(View.VISIBLE);
+            groupByBrandButton.setVisibility(View.VISIBLE);
+        } else if (sortByPriceButtonClicked>0) {
+            // Only sort by price is selected, hide group by brand
+            if(sortByPriceButtonClicked>1){
+                sortByPriceButtonClicked=0;
+            }
+            sortByPriceButton.setVisibility(View.VISIBLE);
+            groupByBrandButton.setVisibility(View.GONE);
+        } else if (groupByBrandButtonClicked>0) {
+            if (groupByBrandButtonClicked>1) groupByBrandButtonClicked=0;
+            sortByPriceButton.setVisibility(View.GONE);
+            groupByBrandButton.setVisibility(View.VISIBLE);
+        }
+    }*/
     BroadcastReceiver powerReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -116,9 +177,18 @@ public class ListActivity extends AppCompatActivity {
     }
     private void queryData() {
         mItemsData.clear();
-        Log.d(LOG_TAG, "Querying data...");
-        Log.d(LOG_TAG, mItems.toString());
-        mItems.limit(itemLimit).get().addOnSuccessListener(queryDocumentSnapshots -> {
+        Query query = mItems;
+
+
+        if (sortByPrice) {
+            query = query.orderBy("price", Query.Direction.ASCENDING);
+        }
+
+        if (groupByBrand) {
+            query = query.orderBy("brand", Query.Direction.ASCENDING);
+        }
+
+        query.get().addOnSuccessListener(queryDocumentSnapshots -> {
             Log.d(LOG_TAG, "Query successful!");
             for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                 ShoppingItem item = document.toObject(ShoppingItem.class);
@@ -127,7 +197,7 @@ public class ListActivity extends AppCompatActivity {
             }
 
             if (mItemsData.size() == 0) {
-                Log.d(LOG_TAG,"No data");
+                Log.d(LOG_TAG, "No data");
                 initializeData();
                 queryData();
             }
@@ -139,7 +209,6 @@ public class ListActivity extends AppCompatActivity {
     }
 
     private void initializeData() {
-        Log.d (LOG_TAG, "ANYAD");
         // Get the resources from the XML file.
         String[] itemsList = getResources()
                 .getStringArray(R.array.shopping_item_names);
@@ -250,6 +319,11 @@ public class ListActivity extends AppCompatActivity {
         }
 
         purpleCircle.setVisibility((cartItems > 0) ? VISIBLE : GONE);
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        queryData();
     }
 
 }

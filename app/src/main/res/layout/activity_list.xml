@@ -31,5 +31,22 @@
         android:layout_marginBottom="10dp"
         android:rotationX="0"
         android:scrollbars="vertical" />
+
+    <Button
+        android:id="@+id/sort_by_price_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:text="Price"/>
+
+    <Button
+        android:id="@+id/group_by_brand_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@id/sort_by_price_button"
+        android:text="Brand" />
 </RelativeLayout>
 

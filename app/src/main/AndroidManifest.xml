@@ -27,5 +27,6 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".ListActivity" />
     </application>
+    <uses-permission android:name="android.permission.SCHEDULE_ALARM" />
 
 </manifest>
